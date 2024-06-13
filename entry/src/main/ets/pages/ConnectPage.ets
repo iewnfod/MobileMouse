@@ -22,14 +22,14 @@ struct ConnectPage {
     switch (this.server.connectionStatus) {
       case ConnectionStatus.success:
         router.pushUrl({url: 'pages/ControlPage', params: {server: this.server}})
-        return
+        return;
       case ConnectionStatus.error:
         ErrorDialog({
           title: GetStringFromResource($r('app.string.connectionFailed')),
           message: this.server.errorMessage,
           backUrl: 'pages/Index'
         })
-        return
+        return;
     }
 
     setTimeout(() => {
