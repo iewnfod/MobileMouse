@@ -1,0 +1,52 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "Use your phone to control the mouse of your computer"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "Use your phone to control the mouse of your computer"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "Mobile Mouse"
+    },
+    {
+      "name": "title",
+      "value": "Mobile Mouse"
+    },
+    {
+      "name": "ServerListTitle",
+      "value": "Servers"
+    },
+    {
+      "name": "connecting",
+      "value": "Connecting..."
+    },
+    {
+      "name": "confirm",
+      "value": "Confirm"
+    },
+    {
+      "name": "cancel",
+      "value": "Cancel"
+    },
+    {
+      "name": "addServer",
+      "value": "New Server"
+    },
+    {
+      "name": "addServerPrompt",
+      "value": "IP Address"
+    },
+    {
+      "name": "remove",
+      "value": "Delete"
+    },
+    {
+      "name": "connectionFailed",
+      "value": "Conntection Failed"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "使用手机直接控制电脑鼠标"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "使用手机直接控制电脑鼠标"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "Mobile Mouse"
+    },
+    {
+      "name": "title",
+      "value": "Mobile Mouse"
+    },
+    {
+      "name": "ServerListTitle",
+      "value": "服务端列表"
+    },
+    {
+      "name": "connecting",
+      "value": "连接中..."
+    },
+    {
+      "name": "confirm",
+      "value": "确认"
+    },
+    {
+      "name": "cancel",
+      "value": "取消"
+    },
+    {
+      "name": "addServer",
+      "value": "添加服务器"
+    },
+    {
+      "name": "addServerPrompt",
+      "value": "IP 地址"
+    },
+    {
+      "name": "remove",
+      "value": "删除"
+    },
+    {
+      "name": "connectionFailed",
+      "value": "连接失败"
+    }
+  ]
+}

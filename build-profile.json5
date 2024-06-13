@@ -1,0 +1,41 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "/Users/muyunxi/.ohos/config/auto_debug_MobileMouse_com.iewnfod.mobilemouse_30086000725334060.cer",
+          "storePassword": "0000001B1AFA1C4100508959D80F8F44F9C314A1041CE4E4D40285F2A20AFE9CDAF75924DE805AFCA13158",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B1998DCF54F4345BB0C6AF5EC469B34B1AB898B1769C2104983C7D5163BCCC03A25647F24392F45",
+          "profile": "/Users/muyunxi/.ohos/config/auto_debug_MobileMouse_com.iewnfod.mobilemouse_30086000725334060.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "/Users/muyunxi/.ohos/config/auto_debug_MobileMouse_com.iewnfod.mobilemouse_30086000725334060.p12"
+        }
+      }
+    ],
+    "compileSdkVersion": 9,
+    "compatibleSdkVersion": 9,
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}
