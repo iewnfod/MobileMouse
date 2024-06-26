@@ -10,7 +10,7 @@ export default struct ListItemCustom {
     router.pushUrl({
       url: this.address,
       params: JSON.parse(this.param)
-    }, router.RouterMode.Standard)
+    })
   }
 
   build() {

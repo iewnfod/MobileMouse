@@ -1,33 +1,63 @@
 import webSocket from '@ohos.net.webSocket'
-
-export enum ConnectionStatus {
-  waiting,
-  success,
-  error
-}
+import util from '@ohos.util'
+import router from '@ohos.router'
+import { ErrorDialog, GetStringFromResource } from './Utils'
 
 export class Server {
   address: string
   scroller: Scroller
+  uid: string
   private ws: webSocket.WebSocket = null
-  connectionStatus: ConnectionStatus = ConnectionStatus.waiting
-  errorMessage: string = ""
 
   constructor(address: string) {
     this.address = address
     this.scroller = new Scroller()
+    this.uid = util.generateRandomUUID()
   }
 
-  connect() {
+  connect(onSuccess: () => void, onError: (err: string) => void) {
     this.ws = webSocket.createWebSocket()
-    this.ws.connect(`ws://${this.address}`, (err, _value) => {
+
+    this.ws.on("message", (err, value) => {
       if (!err) {
-        this.connectionStatus = ConnectionStatus.success
-        console.log(`${this.address} 连接成功`)
+        console.log(`Message: ${value}`)
       } else {
-        this.connectionStatus = ConnectionStatus.error
-        this.errorMessage = err.message
-        console.error(`${this.address} 连接失败`, `错误: ${JSON.stringify(err)}`)
+        console.error(err.message);
+      }
+    })
+
+    this.ws.on("open", () => {
+      this.ws.send(JSON.stringify({
+        type: "move",
+        x: 1,
+        y: 1
+      }))
+      onSuccess()
+    })
+
+    this.ws.on("error", (err) => {
+      onError(err.message)
+    })
+
+    this.ws.on("close", () => {
+      if (router.getState().name !== "Index") {
+        ErrorDialog({
+          message: GetStringFromResource($r('app.string.connectionClosed'))
+        })
+      }
+    })
+
+    this.ws.connect(`ws://${this.address}`, (err) => {
+      if (err) {
+        onError(err.message)
+      }
+    })
+  }
+
+  disconnect(onSuccess?: () => void) {
+    this.ws.close(() => {
+      if (onSuccess) {
+        onSuccess()
       }
     })
   }

@@ -47,6 +47,10 @@
     {
       "name": "connectionFailed",
       "value": "Conntection Failed"
+    },
+    {
+      "name": "connectionClosed",
+      "value": "Connection Closed by Server"
     }
   ]
 }

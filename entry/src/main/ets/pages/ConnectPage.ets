@@ -1,6 +1,6 @@
 import router from '@ohos.router'
 import LoadingBar from '../components/LoadingBar'
-import { ConnectionStatus, Server } from '../Server'
+import { Server } from '../Server'
 import { ErrorDialog, GetStringFromResource } from '../Utils'
 
 @Entry
@@ -9,32 +9,40 @@ struct ConnectPage {
   @State serverAddress: string = router.getParams()?.['serverAddress']
 
   server: Server = new Server(this.serverAddress)
+
+  pageShowing: boolean = false
   
   onPageShow() {
+    this.pageShowing = true
     if (!this.serverAddress) {
-      ErrorDialog({message: 'Server Address is Required', backUrl: 'pages/Index'})
+      ErrorDialog({message: 'Server Address is Required'})
     }
-    this.server.connect()
-    this.checkConnection()
+    this.server.connect(
+      () => {
+        if (this.pageShowing) {
+          router.back({url: 'pages/Index'});
+
+          router.pushUrl({
+            url: 'pages/ControlPage',
+            params: {
+              server: this.server
+            }
+          })
+        }
+      },
+      (err) => {
+        if (this.pageShowing) {
+          ErrorDialog({
+            title: GetStringFromResource($r('app.string.connectionFailed')),
+            message: err
+          })
+        }
+      }
+    )
   }
 
-  checkConnection() {
-    switch (this.server.connectionStatus) {
-      case ConnectionStatus.success:
-        router.pushUrl({url: 'pages/ControlPage', params: {server: this.server}})
-        return;
-      case ConnectionStatus.error:
-        ErrorDialog({
-          title: GetStringFromResource($r('app.string.connectionFailed')),
-          message: this.server.errorMessage,
-          backUrl: 'pages/Index'
-        })
-        return;
-    }
-
-    setTimeout(() => {
-      this.checkConnection()
-    }, 1000)
+  onPageHide() {
+    this.pageShowing = false
   }
 
   build() {

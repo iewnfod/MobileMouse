@@ -42,7 +42,7 @@ struct Index {
   }
 
   onDeleteServer(server: Server) {
-    this.servers = this.servers.filter((s) => s !== server)
+    this.servers = this.servers.filter((s) => s.uid !== server.uid)
     this.saveServers()
   }
 

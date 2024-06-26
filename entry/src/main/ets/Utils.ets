@@ -4,9 +4,11 @@ export function GetStringFromResource(r: Resource) {
   return getContext().resourceManager.getStringSync(r)
 }
 
-type ErrorDialogParamType = {message: string, backUrl: string, title? : string, jsonParams?: any}
+type ErrorDialogParamType = {message: string, backUrl?: string, title? : string, jsonParams?: any}
 
 export function ErrorDialog(p: ErrorDialogParamType) {
+  const b = p.backUrl || "pages/Index"
+
   AlertDialog.show({
     title: p.title,
     message: p.message,
@@ -14,8 +16,8 @@ export function ErrorDialog(p: ErrorDialogParamType) {
     confirm: {
       value: $r('app.string.confirm'),
       action: () => {
-        if (p.backUrl) {
-          router.back({url: p.backUrl, params: p.jsonParams})
+        if (b) {
+          router.back({url: b, params: p.jsonParams})
         }
       },
     }

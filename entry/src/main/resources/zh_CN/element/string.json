@@ -47,6 +47,10 @@
     {
       "name": "connectionFailed",
       "value": "连接失败"
+    },
+    {
+      "name": "connectionClosed",
+      "value": "连接从服务器断开"
     }
   ]
 }
