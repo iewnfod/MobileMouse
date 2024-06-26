@@ -128,7 +128,7 @@ struct Index {
               Row() {
                 ListItemCustom({
                   content: server.address.toString(),
-                  address: 'pages/ConnectPage',
+                  address: 'pages/ControlPage',
                   param: JSON.stringify({ serverAddress: server.address.toString() })
                 })
 

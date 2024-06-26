@@ -51,6 +51,22 @@
     {
       "name": "connectionClosed",
       "value": "连接从服务器断开"
+    },
+    {
+      "name": "serverError",
+      "value": "服务器错误"
+    },
+    {
+      "name": "touchArea",
+      "value": "触控区域"
+    },
+    {
+      "name": "leftClick",
+      "value": "鼠标左键"
+    },
+    {
+      "name": "rightClick",
+      "value": "鼠标右键"
     }
   ]
 }

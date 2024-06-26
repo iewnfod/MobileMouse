@@ -3,11 +3,11 @@ import util from '@ohos.util'
 import router from '@ohos.router'
 import { ErrorDialog, GetStringFromResource } from './Utils'
 
-export class Server {
+export class  Server {
   address: string
   scroller: Scroller
   uid: string
-  private ws: webSocket.WebSocket = null
+  ws: webSocket.WebSocket
 
   constructor(address: string) {
     this.address = address
@@ -15,28 +15,35 @@ export class Server {
     this.uid = util.generateRandomUUID()
   }
 
-  connect(onSuccess: () => void, onError: (err: string) => void) {
+  connect(onSuccess?: () => void, onError?: (err: string) => void) {
     this.ws = webSocket.createWebSocket()
 
     this.ws.on("message", (err, value) => {
       if (!err) {
         console.log(`Message: ${value}`)
       } else {
-        console.error(err.message);
+        console.error(err.message)
       }
     })
 
     this.ws.on("open", () => {
-      this.ws.send(JSON.stringify({
-        type: "move",
-        x: 1,
-        y: 1
-      }))
-      onSuccess()
+      this.moveMouse(0, 0).then((success) => {
+        if (success) {
+          if (onSuccess) {
+            onSuccess()
+          }
+        } else {
+          if (onError) {
+            onError(GetStringFromResource($r('app.string.serverError')))
+          }
+        }
+      })
     })
 
     this.ws.on("error", (err) => {
-      onError(err.message)
+      if (onError) {
+        onError(err.message)
+      }
     })
 
     this.ws.on("close", () => {
@@ -49,7 +56,9 @@ export class Server {
 
     this.ws.connect(`ws://${this.address}`, (err) => {
       if (err) {
-        onError(err.message)
+        if (onError) {
+          onError(err.message)
+        }
       }
     })
   }
@@ -60,5 +69,21 @@ export class Server {
         onSuccess()
       }
     })
+  }
+
+  leftClick() {
+    this.ws.send(JSON.stringify({type: "left click"}))
+  }
+
+  rightClick() {
+    this.ws.send(JSON.stringify({type: "right click"}))
+  }
+
+  moveMouse(x: number, y: number): Promise<boolean> {
+    return this.ws.send(JSON.stringify({
+      type: "move",
+      x: x,
+      y: y
+    }))
   }
 }
