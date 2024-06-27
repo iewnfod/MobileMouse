@@ -62,11 +62,11 @@
     },
     {
       "name": "leftClick",
-      "value": "Left Click"
+      "value": "Left Mouse Button"
     },
     {
       "name": "rightClick",
-      "value": "Right Click"
+      "value": "Right Mouse Button"
     }
   ]
 }
